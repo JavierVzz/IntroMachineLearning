@@ -68,7 +68,6 @@ def main():
     histogram = {}
     for i in range(min(mainList), max(mainList)+1):
         histogram[i] = [0, 0]
-    print(histogram)
     female.sort()
     male.sort()
     for data in female:
@@ -80,7 +79,6 @@ def main():
     normalized = {}
     for i in range(min(mainList), max(mainList) + 1):
         normalized[i] = [0, 0]
-    print(normalized)
     female.sort()
     male.sort()
     for key in histogram.keys():
@@ -89,6 +87,18 @@ def main():
         normalized[key][1] = histogram[key][1]/len(male)
     for key, item in normalized.items():
         print(key, item)
+
+    while True:
+        print("Type [quit] to quit.")
+        value = input("Probability at point: ")
+        if value == "quit":
+            break
+        elif value.isdigit():
+            value = int(value)
+            print("Histogram value: ", histogram[value][0]/(histogram[value][0]+histogram[value][1]))
+            print("Bayesian value: ", len(female)*normalized[value][0]/(len(female)*normalized[value][0]+len(male)*normalized[value][1]))
+
+
 
 if __name__ == '__main__':
     print(os.path.basename(__file__))
