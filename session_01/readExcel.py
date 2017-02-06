@@ -30,6 +30,7 @@ class excelOperations:
         self.__ws = ws
 
     def displayExcelFiles(self):
+        '''Display all the excel files'''
         listXlsx = []
         extRegex = re.compile(r".+xlsx$")
         listFiles = os.listdir()
@@ -40,6 +41,7 @@ class excelOperations:
         return listXlsx
 
     def readExcelFile(self, file):
+        '''Read an excel file'''
         if os.path.isfile(file):
             self.__wb = openpyxl.load_workbook(file)
             self.__ws = self.__wb.active
@@ -48,6 +50,7 @@ class excelOperations:
             return False, False
 
     def displayContent(self):
+        '''Display the content of a excel file'''
         for i in range(1, self.__ws.max_row + 1):
             rowToDisplay = ""
             for j in range(1, self.__ws.max_column + 1):
@@ -56,8 +59,8 @@ class excelOperations:
             logging.debug("Row: " + rowToDisplay)
 
     def createDictionary(self):
+        '''Create dictionary from an excel file'''
         for i in range(2, self.__ws.max_row + 1):
-        # for i in range(2, 1000 + 1):
             produce = self.__ws.cell(row=i, column=1).value
             if produce not in self.__excelDict.keys():
                 self.__excelDict[produce] = self.__ws.cell(row=i, column=2).value
@@ -107,8 +110,8 @@ class excelOperations:
                 self.__ws.cell(row=i, column=2).value = float(value)
                 self.__wb.save("produceSales.xlsx")
 
-    def countByLabel(self):
-        # for i in range(2, self.__ws.max_row + 1):
+    def sortByLabel(self):
+        '''Sort every value by its label'''
         wb = openpyxl.Workbook()
         ws = wb.active
         ws.title = "countBySex"
@@ -129,32 +132,25 @@ class excelOperations:
         print("Males: ", m-2)
         wb.save("assigment_01.xlsx")
 
-    def excelColsToList(self):
-        '''List per row'''
+    def excelColsToList(self, n):
+        '''List per row, n is the sample size if n is max is all the population'''
         female = []
         male = []
-        # for i in range(1, self.__ws.max_column + 1):
-        #     for j in range(2, self.__ws.max_row + 1):
-        #         if i == 1:
-        #             female.append(self.__ws.cell(row=j, column=i).value)
-        #         if i == 2:
-        #             male.append(self.__ws.cell(row=j, column=i).value)
-        for j in range(2, self.__ws.max_row + 1):
+        m=0
+        if n.isalpha():
+            if n == "max":
+                m = self.__ws.max_row + 1
+            else:
+                return False, False
+        elif n.isdigit():
+            m = int(n) + 2
+        for j in range(2, m):
             if self.__ws.cell(row=j, column=1).value is not None:
                 female.append(self.__ws.cell(row=j, column=1).value)
-        for j in range(2, self.__ws.max_row + 1):
+        for j in range(2, m):
             if self.__ws.cell(row=j, column=2).value is not None:
                 male.append(self.__ws.cell(row=j, column=2).value)
         return female, male
-
-    def listToTextFile(self, list1):
-        fo1 = open("female.txt", "w")
-        fo1.writelines([str(item)+"\n" for item in list1])
-        fo1.close()
-        fo2 = open("male.txt", "w")
-        fo2.writelines([str(item)+"\n" for item in list1])
-        fo2.close()
-
 
 if __name__ == '__main__':
     print("Direct access to "+ os.path.basename(__file__))
