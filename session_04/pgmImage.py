@@ -22,7 +22,7 @@ def parsing(lines):
         content += line
     content = content.replace("\n","\t")
     content = content.replace("\t", "\n")
-    content = content.replace("\xa0", "")
+    # content = content.replace("\xa0", "")
     return content
 
 def createPGM(content, filename):
@@ -37,7 +37,7 @@ def createArray(lines):
     return np.array(array)
 
 def main():
-    filename = "zero.txt"
+    filename = "cero.txt"
     lines = readFile(filename)
     content = parsing(lines)
     createPGM(content, filename.replace(".txt",""))
@@ -45,9 +45,9 @@ def main():
     lines = readFile(filename.replace(".txt","Parsed.txt"))
     x = createArray(lines)
     x.shape = -1, x.size
-    print(x.size)
-    print(x.shape)
-    print(x)
+    # print(x.size)
+    # print(x.shape)
+    # print(x)
 
 if __name__ == '__main__':
     print(os.path.basename(__file__))
