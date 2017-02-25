@@ -37,7 +37,7 @@ def createArray(lines):
     return np.array(array)
 
 def main():
-    filename = "cero.txt"
+    filename = "zero.txt"
     lines = readFile(filename)
     content = parsing(lines)
     createPGM(content, filename.replace(".txt",""))
