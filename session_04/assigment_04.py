@@ -7,7 +7,7 @@ def main():
     X = mnist.load_mnist('training', digits=[a,b])
     print(X)
     mnist.printPlot(X)
-
+    print(os.getcwd())
 
 
 if __name__ == '__main__':

@@ -9,7 +9,7 @@ class read_MNIST():
     def __init__(self):
         pass
 
-    def load_mnist(self, dataset="training", digits=range(10), path='C:\\Users\\Javier\\PycharmProjects\\IntroMachineLearning\\session_04\\data_sets'):
+    def load_mnist(self, dataset="training", digits=range(10), path=os.getcwd()+"\\data_sets"):
 
         """
         Adapted from: http://cvxopt.org/applications/svm/index.html?highlight=mnist
