@@ -43,14 +43,14 @@ def load_mnist(dataset="training", digits=range(10), path='C:\\Users\\Javier\\Py
 
 def main():
 
-    images, labels = load_mnist('training', digits=[3,4])
+    images, labels = load_mnist('training', digits=[-5,9])
 
     # converting from NX28X28 array into NX784 array
     flatimages = list()
     for i in images:
         flatimages.append(i.ravel())
     X = np.asarray(flatimages)
-
+    print(X)
     print("Check shape of matrix", X.shape)
     print("Check Mins and Max Values", np.amin(X), np.amax(X))
     print("\nCheck training vector by plotting image \n")
