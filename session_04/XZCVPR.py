@@ -27,11 +27,16 @@ class XZCVPR():
 
     def V(self, C):
         w, V = np.linalg.eigh(C)
-        row = V[0, :]
-        col = V[:, 0]
-        test = np.dot(C,row)/(w[0]*row)
-        # test = np.dot(C, col) / (w[0] * col)
-        return test
+        # return np.fliplr(V)
+        return w, V
+
+    def P(self, Z, V):
+        P = np.dot(Z,V.T)
+        return P
+
+    def R(self, Z, V):
+        P = np.dot(Z,V.T)
+        return P
 
 
 
