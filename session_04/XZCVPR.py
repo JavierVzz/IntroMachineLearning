@@ -34,9 +34,10 @@ class XZCVPR():
         P = np.dot(Z,V.T)
         return P
 
-    def R(self, Z, V):
-        P = np.dot(Z,V.T)
-        return P
+    def R(self, P, V, C):
+        # R = np.dot(P,np.flipud(V))
+        # return R
+        return np.corrcoef(C)
 
 
 

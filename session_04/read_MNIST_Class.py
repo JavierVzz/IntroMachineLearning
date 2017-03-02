@@ -54,6 +54,17 @@ class read_MNIST():
         plt.pyplot.imshow(X[20].reshape(28, 28), interpolation='None', cmap=plt.pyplot.cm.gray)
         plt.pyplot.show()
 
+    def vectortoimg(self, *args, width=28, size=1):
+        n = len(args)
+        fig = plt.pyplot.figure()
+        for i, arg in enumerate(args):
+            plt.pyplot.subplot(1,n,i+1)
+            plt.pyplot.imshow(arg.reshape(width, width), interpolation="None", cmap=plt.pyplot.cm.gray)
+            plt.pyplot.axis("off")
+        fig.tight_layout(pad=0)
+        fig.set_size_inches(w=n*size, h=size)
+        plt.pyplot.show()
+
 
 if __name__ == '__main__':
     print("Direct access to "+ os.path.basename(__file__))
