@@ -27,17 +27,15 @@ class XZCVPR():
 
     def V(self, C):
         w, V = np.linalg.eigh(C)
-        # return np.fliplr(V)
         return w, V
 
     def P(self, Z, V):
         P = np.dot(Z,V.T)
         return P
 
-    def R(self, P, V, C):
-        # R = np.dot(P,np.flipud(V))
-        # return R
-        return np.corrcoef(C)
+    def R(self, P, V):
+        R = np.dot(P,V)
+        return R
 
 
 
