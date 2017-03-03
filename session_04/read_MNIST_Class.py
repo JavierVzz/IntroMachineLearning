@@ -9,7 +9,7 @@ class read_MNIST():
     def __init__(self):
         pass
 
-    def load_mnist(self, dataset="training", digits=range(10), path='C:\\Users\\Javier\\PycharmProjects\\IntroMachineLearning\\session_04\\data_sets'):
+    def load_mnist(self, dataset="training", digits=range(10), path=os.getcwd()+"\\data_sets"):
 
         """
         Adapted from: http://cvxopt.org/applications/svm/index.html?highlight=mnist
@@ -52,6 +52,17 @@ class read_MNIST():
 
     def printPlot(self, X):
         plt.pyplot.imshow(X[20].reshape(28, 28), interpolation='None', cmap=plt.pyplot.cm.gray)
+        plt.pyplot.show()
+
+    def vectortoimg(self, *args, width=28, size=1):
+        n = len(args)
+        fig = plt.pyplot.figure()
+        for i, arg in enumerate(args):
+            plt.pyplot.subplot(1,n,i+1)
+            plt.pyplot.imshow(arg.reshape(width, width), interpolation="None", cmap=plt.pyplot.cm.gray)
+            plt.pyplot.axis("off")
+        fig.tight_layout(pad=0)
+        fig.set_size_inches(w=n*size, h=size)
         plt.pyplot.show()
 
 
