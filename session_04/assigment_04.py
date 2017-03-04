@@ -70,10 +70,10 @@ def main():
     print(P)
     print(P.shape)
     print(np.mean(P,axis=0))
-    # Xrec =np.dot(P,V2d)+ X_bar
-    # print(Xrec)
-    # mnist.printPlot(Xrec, label="Xrec")
-    # mnist.vectortoimg(Xrec[4], Xrec[-1], label="Xrec")
+    Xrec =np.dot(P,V2d)+ X_bar
+    print(Xrec)
+    mnist.printPlot(Xrec, label="Xrec")
+    mnist.vectortoimg(Xrec[4], Xrec[-1], label="Xrec")
     # R = xzcvpr.R(P,V,Z)
     # print("R")
     # print(R)
