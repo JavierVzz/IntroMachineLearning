@@ -55,6 +55,12 @@ class read_MNIST():
         plt.pyplot.imshow(X[20].reshape(28, 28), interpolation='None', cmap=plt.pyplot.cm.gray)
         plt.pyplot.show()
 
+
+    def checkCplot(self, C, label):
+        fig = plt.pyplot.figure(label)
+        plt.pyplot.imshow(C, interpolation='None', cmap=plt.pyplot.cm.gray)
+        plt.pyplot.show()
+
     def vectortoimg(self, *args, width=28, size=1, label):
         n = len(args)
         fig = plt.pyplot.figure(label)
