@@ -42,7 +42,21 @@ class XZCVPR():
         Xrec = np.dot(P, V2d) + X_bar
         return Xrec
 
+    def mup(self, P):
+        mup1 = np.mean(P[:,0][np.where(P[:,0] > 0)])
+        mup2 = np.mean(P[:,1][np.where(P[:,1] > 0)])
+        return mup1, mup2
+        
+    def mun(self, P):
+        mun1 = np.mean(P[:,0][np.where(P[:,0] < 0)])
+        mun2 = np.mean(P[:,1][np.where(P[:,1] < 0)])
+        return mun1, mun2
 
+    def cp(self, P):
+        p0 = P[:,0][np.where(P[:,0] > 0)]
+        p1 = P[:,1][np.where(P[:,1] > 0)]
+
+        return p0, p1
 
 if __name__ == '__main__':
     print("Direct access to " + os.path.basename(__file__))

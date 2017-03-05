@@ -28,7 +28,7 @@ def main():
     print("C")
     print(C)
     # mnist.printPlot(C, label="C")
-    mnist.checkCplot(C, label="C")
+    # mnist.checkCplot(C, label="C")
     # mnist.vectortoimg(C, label="C")
     # print("C.shape")
     # print(C.shape)
@@ -67,11 +67,31 @@ def main():
     # print(v.shape)
     # print(v)
     P = xzcvpr.P(Z,V2d)
-    print("P")
-    print(P)
+    # print("P")
+    # print(P)
     print(P.shape)
-    print(np.mean(P,axis=0))
-    print(np.where(P >= 0))
+    # print(np.mean(P,axis=0))
+    # print(np.where(P >= 0))
+
+    print("\n\033[1mmup\033[0m")
+    mup1, mup2 = xzcvpr.mup(P)
+    print(mup1)
+    print(mup2)
+
+    print("\n\033[1mmun\033[0m")
+    mun1, mun2 = xzcvpr.mun(P)
+    print(mun1)
+    print(mun2)
+
+    print("\n\033[1mcp\033[0m")
+    p0, p1 = xzcvpr.cp(P)
+    print(p0.shape)
+    print(p1.shape)
+
+
+
+    
+
 
     # Xrec = xzcvpr.Xrec(P, V2d, X_bar)
     # print(Xrec)
