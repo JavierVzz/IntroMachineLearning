@@ -50,13 +50,20 @@ class read_MNIST():
 
         return X
 
-    def printPlot(self, X):
+    def printPlot(self, X, label):
+        fig = plt.pyplot.figure(label)
         plt.pyplot.imshow(X[20].reshape(28, 28), interpolation='None', cmap=plt.pyplot.cm.gray)
         plt.pyplot.show()
 
-    def vectortoimg(self, *args, width=28, size=1):
+
+    def checkCplot(self, C, label):
+        fig = plt.pyplot.figure(label)
+        plt.pyplot.imshow(C, interpolation='None', cmap=plt.pyplot.cm.gray)
+        plt.pyplot.show()
+
+    def vectortoimg(self, *args, width=28, size=1, label):
         n = len(args)
-        fig = plt.pyplot.figure()
+        fig = plt.pyplot.figure(label)
         for i, arg in enumerate(args):
             plt.pyplot.subplot(1,n,i+1)
             plt.pyplot.imshow(arg.reshape(width, width), interpolation="None", cmap=plt.pyplot.cm.gray)

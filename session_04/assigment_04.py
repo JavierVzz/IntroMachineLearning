@@ -11,19 +11,25 @@ def main():
     # print("Positive Digit : 9")
     a = -5
     b = 9
-    # X = mnist.load_mnist('training', digits=[a,b])
-    # mnist.printPlot(X)
-    # mnist.vectortoimg(X[4], X[-1])
-    X = np.array([[72., 101., 94.], [50., 96., 70.], [14., 79., 10.], [8., 70., 1.]], np.float64)
+    X = mnist.load_mnist('training', digits=[a,b])
+    # mnist.printPlot(X, label="X")
+    # mnist.vectortoimg(X[4], X[-1], label="X")
+    # X = np.array([[72., 101., 94.], [50., 96., 70.], [14., 79., 10.], [8., 70., 1.]], np.float64)
     xzcvpr = XZCVPR.XZCVPR()
     X_bar = xzcvpr.X(X)
-    # print(X_bar)
+    print("X_bar")
+    print(X_bar.shape)
+    print(X_bar)
     Z = xzcvpr.Z(X, X_bar)
-    # mnist.printPlot(Z)
-    # print(Z)
+    # mnist.printPlot(Z, label="Z")
+    print("Z")
+    print(Z)
     C = xzcvpr.C(Z)
-    # mnist.printPlot(C)
-    # mnist.vectortoimg(C[4], C[-1])
+    print("C")
+    print(C)
+    # mnist.printPlot(C, label="C")
+    # mnist.checkCplot(C, label="C")
+    # mnist.vectortoimg(C, label="C")
     # print("C.shape")
     # print(C.shape)
     # mnist.printPlot(C)
@@ -37,24 +43,65 @@ def main():
     # row = V[0,:]
     # col = V[:,0]
     # print(w)
-    # print(V)
+    print(V.shape)
     # print(np.dot(C, row) / (w[0] * row))
     # print(np.dot(C, col) / (w[0] * col))
-    # w = np.flipud(w)
-    V1 = np.flipud(V.T)
-
+    # print(np.dot(C, col) == (w[0] * col))
+    w = np.flipud(w)
+    V = np.flipud(V.T)
+    # print(V1[0,:] == V[:,783])
+    # print(V[0,:])
+    # print(V[1,:])
+    V2d= V[0:2, :].copy()
+    # print(V[0,:] == V2d[0,:])
+    # print(V[0,:] is V2d[0,:])
+    # df = pd.DataFrame(V[0,:])
+    # df.to_excel("V1.xlsx", sheet_name="V1")
+    # df = pd.DataFrame(V[1,:])
+    # df.to_excel("V2.xlsx", sheet_name="V2")
+    # row = V1[0,:]
+    # print(np.dot(C,row) == (w1[0]*row))
     # print("V.shape")
     # print(V.shape)
-    # row = V[0,:]
-    # v = np.dot(C,row)/(w[0]*row)
+
     # print(v.shape)
     # print(v)
-    P = xzcvpr.P(Z,V1)
-    print("P")
-    print(P)
-    R = xzcvpr.P(P,V1)
-    print("R")
-    print(R)
+    P = xzcvpr.P(Z,V2d)
+    # print("P")
+    # print(P)
+    print(P.shape)
+    # print(np.mean(P,axis=0))
+    # print(np.where(P >= 0))
+
+    print("\n\033[1mmup\033[0m")
+    mup1, mup2 = xzcvpr.mup(P)
+    print(mup1)
+    print(mup2)
+
+    print("\n\033[1mmun\033[0m")
+    mun1, mun2 = xzcvpr.mun(P)
+    print(mun1)
+    print(mun2)
+
+    print("\n\033[1mcp\033[0m")
+    p0, p1 = xzcvpr.cp(P)
+    print(p0.shape)
+    print(p1.shape)
+
+
+
+    
+
+
+    # Xrec = xzcvpr.Xrec(P, V2d, X_bar)
+    # print(Xrec)
+    # mnist.printPlot(Xrec, label="Xrec")
+    # mnist.vectortoimg(Xrec[4], Xrec[-1], label="Xrec")
+
+    # R = xzcvpr.R(P,V,Z)
+    # print("R")
+    # print(R)
+
 
 
 
