@@ -17,10 +17,10 @@ def main():
     dfFemale, dfMale = h.sortDataPerLabel(dfInches, label1, label2)
     hist = h.hist(dfFemale)
     print("\033[1m\nFemale: \nLabel Frequency\033[0m:\n{0}".format(hist))
+    h.plotHist(dfFemale, label1, label2, hist)
     hist = h.hist(dfMale)
     print("\033[1m\nMale: \nLabel Frequency\033[0m:\n{0}".format(hist))
-    h.plotHist(dfFemale, label1, label2)
-    h.plotHist(dfMale, label1, label2)
+    h.plotHist(dfMale, label1, label2, hist)
 
 
 if __name__ == '__main__':
