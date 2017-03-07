@@ -43,7 +43,7 @@ def load_mnist(dataset="training", digits=range(10), path='C:\\Users\\Javier\\Py
 
 def main():
 
-    images, labels = load_mnist('training', digits=[-5,9])
+    images, labels = load_mnist('training', digits=[5,9])
 
     # converting from NX28X28 array into NX784 array
     flatimages = list()

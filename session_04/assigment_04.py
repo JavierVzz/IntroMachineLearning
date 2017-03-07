@@ -1,29 +1,31 @@
-import read_MNIST_Class, XZCVPR, os
+import read_MNIST_Class, XZCVPR, XZCVPR_Test_Class, os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
 def main():
     mnist = read_MNIST_Class.read_MNIST()
+    xzcvpr = XZCVPR.XZCVPR()
+    test = XZCVPR_Test_Class.XZCVPR_Test()
     # a = int(input("Negative Digit : "))
     # b = int(input("Positive Digit : "))
-    # print("Negative Digit : -5")
+    # print("Negative Digit : 5")
     # print("Positive Digit : 9")
-    a = -5
+    a = 5
     b = 9
     X = mnist.load_mnist('training', digits=[a,b])
-    # mnist.printPlot(X, label="X")
-    # mnist.vectortoimg(X[4], X[-1], label="X")
+
+    test.test_X(X)
+
     # X = np.array([[72., 101., 94.], [50., 96., 70.], [14., 79., 10.], [8., 70., 1.]], np.float64)
-    xzcvpr = XZCVPR.XZCVPR()
+
     X_bar = xzcvpr.X(X)
-    print("X_bar")
-    print(X_bar.shape)
-    print(X_bar)
     Z = xzcvpr.Z(X, X_bar)
-    # mnist.printPlot(Z, label="Z")
+
     print("Z")
     print(Z)
+    test.test_Z(Z, X_bar)
+
     C = xzcvpr.C(Z)
     print("C")
     print(C)
