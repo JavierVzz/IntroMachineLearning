@@ -53,10 +53,7 @@ class read_MNIST():
 
 
 
-    def checkCplot(self, C, label):
-        fig = plt.pyplot.figure(label)
-        plt.pyplot.imshow(C, interpolation='None', cmap=plt.pyplot.cm.gray)
-        plt.pyplot.show()
+
 
 
 

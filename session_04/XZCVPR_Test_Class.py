@@ -24,6 +24,26 @@ class XZCVPR_Test():
         print("Z shape", Z.shape)
         print("Z min", np.amin(Z))
         print("Z max", np.amax(Z))
+        print("Z mean", np.mean(Z,axis=0))
+        plt.pyplot.plot(X_bar)
+        plt.pyplot.show()
+
+    def test_C(self,C):
+        print("\033[1m\nC TEST\033[0m")
+        print("C shape", C.shape)
+        print("Symmetry", C==C.T)
+        self.checkCplot(C, label="C")
+
+    def test_V(self,V):
+        print("\033[1m\nV TEST\033[0m")
+        print("V shape", V.shape)
+        print("Norm check", np.linalg.norm(V[0]))
+        print("Norm check", np.linalg.norm(V[1]))
+        print("Orthogonality check", np.dot(V[0,:],V[1,:]))
+        self.vectortoimg(V[0], V[1], label="V")
+
+
+
 
     def vectortoimg(self, *args, width=28, size=1, label):
         n = len(args)
@@ -39,6 +59,11 @@ class XZCVPR_Test():
     def printPlot(self, X, label):
         fig = plt.pyplot.figure(label)
         plt.pyplot.imshow(X[20].reshape(28, 28), interpolation='None', cmap=plt.pyplot.cm.gray)
+        plt.pyplot.show()
+
+    def checkCplot(self, C, label):
+        fig = plt.pyplot.figure(label)
+        plt.pyplot.imshow(C, interpolation='None', cmap=plt.pyplot.cm.gray)
         plt.pyplot.show()
 
 if __name__ == '__main__':
