@@ -42,8 +42,12 @@ class XZCVPR_Test():
         print("Orthogonality check", np.dot(V[0,:],V[1,:]))
         self.vectortoimg(V[0], V[1], label="V")
 
-
-
+    def test_P(self, P, V2d, X_bar):
+        print("\033[1m\nP TEST\033[0m")
+        print("P shape", P.shape)
+        print("P mean", np.mean(P))
+        Xrec = np.dot(P, V2d) + X_bar
+        self.vectortoimg(Xrec[0], Xrec[1], label="Xrec")
 
     def vectortoimg(self, *args, width=28, size=1, label):
         n = len(args)
@@ -65,6 +69,8 @@ class XZCVPR_Test():
         fig = plt.pyplot.figure(label)
         plt.pyplot.imshow(C, interpolation='None', cmap=plt.pyplot.cm.gray)
         plt.pyplot.show()
+
+
 
 if __name__ == '__main__':
     print("Direct access to " + os.path.basename(__file__))

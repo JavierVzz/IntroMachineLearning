@@ -48,7 +48,9 @@ class read_MNIST():
             flatimages.append(i.ravel())
         X = np.asarray(flatimages)
 
-        return X
+        T = labels.flatten()
+
+        return X, T
 
 
 
