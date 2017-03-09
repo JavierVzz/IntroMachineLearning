@@ -8,13 +8,9 @@ class XZCVPR():
         pass
 
     def X(self, X):
-        # np.savetxt("X.txt", X)
-        # df =pd.DataFrame(X)
-        # df.to_excel("X.xlsx", sheet_name="X")
         X_bar = np.mean(X,axis=0)
         df = pd.DataFrame(X_bar)
-        # np.savetxt("X_bar.txt", X_bar)
-        # df.to_excel("X_Bar.xlsx", sheet_name="X_Bar")
+        df.to_excel("X_Bar.xlsx", sheet_name="X_Bar")
         return X_bar
 
     def Z(self, X, X_bar):
@@ -27,6 +23,13 @@ class XZCVPR():
 
     def V(self, C):
         w, V = np.linalg.eigh(C)
+        w = np.flipud(w)
+        V = np.flipud(V.T)
+        V = V[0:2, :].copy()
+        df = pd.DataFrame(V)
+        df.to_excel("V.xlsx", sheet_name="V")
+        # df = pd.DataFrame(X_bar)
+        # df.to_excel("X_Bar.xlsx", sheet_name="X_Bar")
         return w, V
 
     def P(self, Z, V):
@@ -42,21 +45,38 @@ class XZCVPR():
         Xrec = np.dot(P, V2d) + X_bar
         return Xrec
 
-    def mup(self, P):
-        mup1 = np.mean(P[:,0][np.where(P[:,0] > 0)])
-        mup2 = np.mean(P[:,1][np.where(P[:,1] > 0)])
-        return mup1, mup2
-        
-    def mun(self, P):
-        mun1 = np.mean(P[:,0][np.where(P[:,0] < 0)])
-        mun2 = np.mean(P[:,1][np.where(P[:,1] < 0)])
-        return mun1, mun2
+    def mup_mun(self, P, T, labelp, labeln):
+        mup = np.mean(P[T==labelp], axis=0)
+        mun = np.mean(P[T==labeln], axis=0)
+        return mup, mun
 
-    def cp(self, P):
-        p0 = P[:,0][np.where(P[:,0] > 0)]
-        p1 = P[:,1][np.where(P[:,1] > 0)]
+    def cp_cn(self, P, T, labelp, labeln):
+        cp = np.cov(P[T==labelp], rowvar = False)
+        cn = np.cov(P[T==labeln], rowvar = False)
+        return cp, cn
 
-        return p0, p1
+    def min_max(self, P, T, label):
+        min = np.min(P[T==label])
+        max = np.max(P[T==label])
+        return min, max
+
+    def hist(self, P, T, label):
+        P = P[T == label]
+        print(P[:,0])
+        H, xedges, yedges = np.histogram2d(P[:,0],P[:,1], bins=[25, 25])
+        # writer = pd.ExcelWriter("Pn_histogram_2d.xlsx")
+        # h = pd.DataFrame(H)
+        # xd = pd.DataFrame(xedges)
+        # yd = pd.DataFrame(yedges)
+        # h.to_excel(writer,"H")
+        # xd.to_excel(writer,"x_edges")
+        # yd.to_excel(writer,"y_edges")
+        # writer.save()
+        return H, xedges, yedges
+
+
+
+
 
 if __name__ == '__main__':
     print("Direct access to " + os.path.basename(__file__))

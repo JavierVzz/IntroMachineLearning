@@ -13,72 +13,68 @@ def main():
     # print("Positive Digit : 9")
     a = 5
     b = 9
-    X = mnist.load_mnist('training', digits=[a,b])
 
-    test.test_X(X)
+    X, T = mnist.load_mnist('training', digits=[a,b])
+    [[labeln, labelp], [Nn,Np]] = np.unique(T, return_counts= True)
 
-    # X = np.array([[72., 101., 94.], [50., 96., 70.], [14., 79., 10.], [8., 70., 1.]], np.float64)
+    # test.test_X(X)
 
     X_bar = xzcvpr.X(X)
-    Z = xzcvpr.Z(X, X_bar)
 
-    print("Z")
-    print(Z)
-    test.test_Z(Z, X_bar)
+    Z = xzcvpr.Z(X, X_bar)
+    # print("Z")
+    # print(Z)
+    # test.test_Z(Z, X_bar)
 
     C = xzcvpr.C(Z)
-    print("C")
-    print(C)
-    test.test_C(C)
+    # print("C")
+    # print(C)
+    # test.test_C(C)
 
     w, V = xzcvpr.V(C)
-    print("V")
-    w = np.flipud(w)
-    V = np.flipud(V.T)
-    V2d= V[0:2, :].copy()
-    print(V2d)
-    test.test_V(V2d)
+    # print("V")
+    # print(V)
+    # test.test_V(V)
 
-    P = xzcvpr.P(Z,V2d)
-    # print("P")
+    P = xzcvpr.P(Z,V)
+    print("P")
     # print(P)
-    print(P.shape)
-    # print(np.mean(P,axis=0))
-    # print(np.where(P >= 0))
+    # test.test_P(P, V, X_bar)
 
-    print("\n\033[1mmup\033[0m")
-    mup1, mup2 = xzcvpr.mup(P)
-    print(mup1)
-    print(mup2)
+    print("\n\033[1mNp and Nn\033[0m")
+    print("Np", Np)
+    print("Nn", Nn)
 
-    print("\n\033[1mmun\033[0m")
-    mun1, mun2 = xzcvpr.mun(P)
-    print(mun1)
-    print(mun2)
+    print("\n\033[1mLabels\033[0m")
+    print("Label p", labelp)
+    print("Label n", labeln)
 
-    print("\n\033[1mcp\033[0m")
-    p0, p1 = xzcvpr.cp(P)
-    print(p0.shape)
-    print(p1.shape)
+    print("\n\033[1mmup_mun\033[0m")
+    mup, mun= xzcvpr.mup_mun(P, T, labelp, labeln)
+    print("mup :", mup)
+    print("mun :", mun)
 
+    print("\n\033[1mcp_cn\033[0m")
+    cp, cn = xzcvpr.cp_cn(P, T, labelp, labeln)
+    print("cp:",cp)
+    print("cn:",cn)
 
+    print("\n\033[1mmin_max\033[0m")
+    min, max = xzcvpr.min_max(P, T, labeln)
+    print("Pn min:", min)
+    print("Pn max:", max)
 
-    
+    min, max = xzcvpr.min_max(P, T, labelp)
+    print("Pp min:", min)
+    print("Pp max:", max)
 
+    H_p, xedges_p, yedges_p = xzcvpr.hist(P, T, labelp)
+    H_n, xedges_n, yedges_n = xzcvpr.hist(P, T, labeln)
 
-    # Xrec = xzcvpr.Xrec(P, V2d, X_bar)
-    # print(Xrec)
-    # mnist.printPlot(Xrec, label="Xrec")
-    # mnist.vectortoimg(Xrec[4], Xrec[-1], label="Xrec")
+    print("H_p shape: ", H_p.shape)
+    print("H_p: ", H_p)
 
-    # R = xzcvpr.R(P,V,Z)
-    # print("R")
-    # print(R)
-
-
-
-
-
+    test.checkCplot(H_p,"H_p")
 
 
 

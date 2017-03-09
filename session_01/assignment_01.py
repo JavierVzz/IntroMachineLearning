@@ -13,14 +13,41 @@ def main():
     dfInches = h.convertToInches(df)
     label1 = "Female"
     label2 = "Male"
-    print("\033[1mMin\033[0m: {0}\n\033[1mMax\033[0m: {1}".format(np.amin(dfInches[:,0]), np.amax(dfInches[:,0])))
+    print("\033[1mPopulation Data\033[0m")
+    print("Min: ",np.amin(dfInches[:,0]))
+    print("Max: ",np.amax(dfInches[:,0]))
+
     dfFemale, dfMale = h.sortDataPerLabel(dfInches, label1, label2)
-    hist = h.hist(dfFemale)
-    print("\033[1m\nFemale: \nLabel Frequency\033[0m:\n{0}".format(hist))
-    h.plotHist(dfFemale, label1, label2, hist)
-    hist = h.hist(dfMale)
-    print("\033[1m\nMale: \nLabel Frequency\033[0m:\n{0}".format(hist))
-    h.plotHist(dfMale, label1, label2, hist)
+    
+    # Female data
+    print("\033[1m\nFemale: \033[0m")
+    Fhist = h.hist(dfFemale)
+    Fnorm = h.normPDF(np.mean(dfFemale[:,0]), np.std(dfFemale[:,0]), Fhist[:,0])
+    print("Mean: ", np.mean(dfFemale[:,0]))
+    print("Std:  ", np.std(dfFemale[:,0]))
+    print("Size: ", dfFemale[:,0].size)
+    print("Count Histogram\n", Fhist)
+    np.set_printoptions(suppress=True)
+    print("PDF Histogram\n", Fnorm)
+    # h.plotHist(dfFemale, label1, label2, hist)
+
+    # Male data
+    print("\033[1m\nFemale: \033[0m")
+    Mhist = h.hist(dfMale)
+    Mnorm = h.normPDF(np.mean(dfMale[:,0]), np.std(dfMale[:,0]), Mhist[:,0])
+    print("Mean: ", np.mean(dfMale[:,0]))
+    print("Std:  ", np.std(dfMale[:,0]))
+    print("Size: ", dfMale[:,0].size)
+    print("Count Histogram\n", Mhist)
+    np.set_printoptions(suppress=True)
+    print("PDF Histogram\n", Mnorm)
+    # h.plotHist(dfMale, label1, label2, hist)
+
+    queryArray = np.arange(55, 81, 5)
+    query = h.query(queryArray, Fhist, Mhist)
+    print(query)
+
+
 
 
 if __name__ == '__main__':
