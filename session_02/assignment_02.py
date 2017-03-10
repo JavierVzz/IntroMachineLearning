@@ -10,47 +10,56 @@ def main():
     h = histogramClass.histogram()
     file = "Assignment_2_to_Pandas.xlsx"
     df = h.loadData(file)
-    dfInches = h.convertToInches(df)
     label1 = "Female"
     label2 = "Male"
-    print("\033[1mPopulation Data\033[0m")
-    print("Min: ",np.amin(dfInches[:,0]))
-    print("Max: ",np.amax(dfInches[:,0]))
+    dfFemale, dfMale = h.sortDataPerLabel(df, label1, label2)
+    Fmean, Fmin, Fmax, Fsize = h.basicStats(dfFemale)
 
-    dfFemale, dfMale = h.sortDataPerLabel(dfInches, label1, label2)
-    
-    # Female data
-    print("\033[1m\nFemale: \033[0m")
-    Fhist = h.hist(dfFemale)
-    Fnorm = h.normPDF(np.mean(dfFemale[:,0]), np.std(dfFemale[:,0]), Fhist[:,0])
-    print("Mean: ", np.mean(dfFemale[:,0]))
-    print("Std:  ", np.std(dfFemale[:,0]))
-    print("Size: ", dfFemale[:,0].size)
-    print("Count Histogram\n", Fhist)
-    np.set_printoptions(suppress=True)
-    print("PDF Histogram\n", Fnorm)
-    h.plotHist(dfFemale, label1, label2, Fhist)
+    print("\033[1mFemale Data\033[0m")
+    print("Size: ", Fsize)
 
-    # Male data
-    print("\033[1m\nFemale: \033[0m")
-    Mhist = h.hist(dfMale)
-    Mnorm = h.normPDF(np.mean(dfMale[:,0]), np.std(dfMale[:,0]), Mhist[:,0])
-    print("Mean: ", np.mean(dfMale[:,0]))
-    print("Std:  ", np.std(dfMale[:,0]))
-    print("Size: ", dfMale[:,0].size)
-    print("Count Histogram\n", Mhist)
-    np.set_printoptions(suppress=True)
-    print("PDF Histogram\n", Mnorm)
-    h.plotHist(dfMale, label1, label2, Mhist)
+    print("\nHeight")
+    print("Min: ", Fmin[0])
+    print("Max: ", Fmax[0])
+    print("Mean: ", Fmean[0])
 
-    queryArray = np.arange(55, 81, 5)
-    print("\033[1m\nHistogram results: \033[0m")
-    query = h.query(queryArray, Fhist, Mhist)
-    print(query)
+    print("\nHandSpan")
+    print("Min: ", Fmin[1])
+    print("Max: ", Fmax[1])
+    print("Mean: ", Fmean[1])
 
-    print("\033[1m\nBayesian results: \033[0m")
-    query = h.queryPDF(queryArray, Fnorm, Mnorm, dfFemale[:,0].size, dfMale[:,0].size)
-    print(query)
+    print("Cov:")
+    Fcov = h.cov(dfFemale[:,1], dfFemale[:,2])
+    print(Fcov)
+
+    Hf, Hdf, xedges, yedges = h.hist2d(dfFemale)
+    print("Histogram")
+    print(Hdf)
+
+    print("\033[1mMale Data\033[0m")
+    print("Size: ", np.size(dfMale)/3)
+
+    print("\nHeight")
+    print("Min: ",np.amin(dfMale[:,1]))
+    print("Max: ",np.amax(dfMale[:,1]))
+    print("Mean: ",np.mean(dfMale[:,1]))
+
+    print("\nHandSpan")
+    print("Min: ",np.amin(dfMale[:,2]))
+    print("Max: ",np.amax(dfMale[:,2]))
+    print("Mean: ", np.mean(dfMale[:,2]))
+
+    print("Cov:")
+    Mcov = h.cov(dfMale[:,1], dfMale[:,2])
+    print(Mcov)
+
+    Hm, Hdm, xedges, yedges = h.hist2d(dfMale)
+    print("Histogram:")
+    print(Hdm)
+
+    # normPDF2d(Fcov, Mcov, )
+
+ 
 
 if __name__ == '__main__':
     print(os.path.basename(__file__))
