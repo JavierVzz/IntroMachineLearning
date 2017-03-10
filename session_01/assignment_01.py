@@ -29,7 +29,7 @@ def main():
     print("Count Histogram\n", Fhist)
     np.set_printoptions(suppress=True)
     print("PDF Histogram\n", Fnorm)
-    # h.plotHist(dfFemale, label1, label2, hist)
+    h.plotHist(dfFemale, label1, label2, Fhist)
 
     # Male data
     print("\033[1m\nFemale: \033[0m")
@@ -41,14 +41,16 @@ def main():
     print("Count Histogram\n", Mhist)
     np.set_printoptions(suppress=True)
     print("PDF Histogram\n", Mnorm)
-    # h.plotHist(dfMale, label1, label2, hist)
+    h.plotHist(dfMale, label1, label2, Mhist)
 
     queryArray = np.arange(55, 81, 5)
+    print("\033[1m\nHistogram results: \033[0m")
     query = h.query(queryArray, Fhist, Mhist)
     print(query)
 
-
-
+    print("\033[1m\nBayesian results: \033[0m")
+    query = h.queryPDF(queryArray, Fnorm, Mnorm, dfFemale[:,0].size, dfMale[:,0].size)
+    print(query)
 
 if __name__ == '__main__':
     print(os.path.basename(__file__))
