@@ -8,7 +8,7 @@ import numpy as np
 
 def main():
     h = histogramClass.histogram()
-    file = "Assignment_1_to_Pandas.xlsx"
+    file = "Assignment_2_to_Pandas.xlsx"
     df = h.loadData(file)
     dfInches = h.convertToInches(df)
     label1 = "Female"
