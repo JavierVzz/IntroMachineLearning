@@ -21,7 +21,6 @@ class histogram():
         size = np.size(df)/3
         return mean, min, max, size
 
-
     def sortDataPerLabel(self, df, label1, label2):
         lb1Data = df[np.where(df[:, 0] == label1)]
         lb2Data = df[np.where(df[:, 0] == label2)]
@@ -32,12 +31,26 @@ class histogram():
         dfInches = np.vstack((dfInches, df[:,2])).T
         return dfInches
 
-    def normPDF2d(self, Fcov, Mcov, mean, x):
-        norm = 1/np.sqrt(2*np.pi*std**2)*np.exp((-1*(x-mean)**2)/(2*std**2))
-        # df = pd.DataFrame(norm)
-        # df.to_excel("norm.xlsx", sheet_name="norm")
-        norm = np.vstack((x, norm)).T
-        return norm
+    def normPDF2d(self, Fcov, Mcov, Fmean, Mmean, Fsize, Msize, queryArray):
+        Fp = Fsize/(Fsize+Msize)
+        Mp = Msize/(Fsize+Msize)
+        Fdet = np.linalg.det(Fcov)
+        Mdet = np.linalg.det(Mcov)
+        Finv = np.linalg.inv(Fcov)
+        Minv = np.linalg.inv(Mcov)
+        FqueryArrayu = queryArray - Fmean
+        MqueryArrayu = queryArray - Mmean
+        FequeryArrayp = np.dot(np.dot(FqueryArrayu,Finv),FqueryArrayu.T)/-2
+        MequeryArrayp = np.dot(np.dot(MqueryArrayu,Minv),MqueryArrayu.T)/-2
+        Fnorm = self.normPDF(Fdet, FequeryArrayp.diagonal())
+        Mnorm = self.normPDF(Mdet, MequeryArrayp.diagonal())
+        normPDF2d = Fnorm*Fp/(Fnorm*Fp+Mnorm*Mp)
+        return normPDF2d
+
+    def normPDF(self, det, exp):
+        exp = exp.astype(float)
+        normPDF = np.dot((1/(2*np.pi*np.sqrt(det))),np.exp(exp))
+        return normPDF
 
     def cov(self, df1, df2):
         x = df1.astype(float)
@@ -61,6 +74,12 @@ class histogram():
         # print(xedges)
         # print(yedges)
         return H, Hdf, xedges, yedges
+
+    def displayQueryPDF(self, queryArray, normPDF2d):
+        np.set_printoptions(suppress=True)
+        query = np.hstack((queryArray,normPDF2d.reshape(-1,1)))
+        return query
+
 
     def query(self, queryArray, Fhist, Mhist):
         InF = queryArray[np.in1d(queryArray, Fhist[:, 0])]

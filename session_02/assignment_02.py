@@ -14,6 +14,7 @@ def main():
     label2 = "Male"
     dfFemale, dfMale = h.sortDataPerLabel(df, label1, label2)
     Fmean, Fmin, Fmax, Fsize = h.basicStats(dfFemale)
+    Mmean, Mmin, Mmax, Msize = h.basicStats(dfMale)
 
     print("\033[1mFemale Data\033[0m")
     print("Size: ", Fsize)
@@ -36,18 +37,18 @@ def main():
     print("Histogram")
     print(Hdf)
 
-    print("\033[1mMale Data\033[0m")
+    print("\n\033[1mMale Data\033[0m")
     print("Size: ", np.size(dfMale)/3)
 
     print("\nHeight")
-    print("Min: ",np.amin(dfMale[:,1]))
-    print("Max: ",np.amax(dfMale[:,1]))
-    print("Mean: ",np.mean(dfMale[:,1]))
+    print("Min: ", Mmin[0])
+    print("Max: ", Mmax[0])
+    print("Mean: ", Mmean[0])
 
     print("\nHandSpan")
-    print("Min: ",np.amin(dfMale[:,2]))
-    print("Max: ",np.amax(dfMale[:,2]))
-    print("Mean: ", np.mean(dfMale[:,2]))
+    print("Min: ", Mmin[1])
+    print("Max: ", Mmax[1])
+    print("Mean: ", Mmean[1])
 
     print("Cov:")
     Mcov = h.cov(dfMale[:,1], dfMale[:,2])
@@ -57,9 +58,12 @@ def main():
     print("Histogram:")
     print(Hdm)
 
-    # normPDF2d(Fcov, Mcov, )
+    queryArray = np.array([[69, 17.5], [66, 22], [70, 21.5], [69, 23.5]])
 
- 
+    normPDF2d = h.normPDF2d(Fcov, Mcov, Fmean, Mmean, Fsize, Msize, queryArray)
+    query = h.displayQueryPDF(queryArray, normPDF2d)
+    print(query)
+    # print(normPDF2d)
 
 if __name__ == '__main__':
     print(os.path.basename(__file__))
