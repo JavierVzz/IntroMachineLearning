@@ -38,7 +38,7 @@ def main():
 
     P = xzcvpr.P(Z,V)
     print("P")
-    # print(P)
+    print(P.shape)
     # test.test_P(P, V, X_bar)
 
     print("\n\033[1mNp and Nn\033[0m")
@@ -76,8 +76,18 @@ def main():
 
     # test.checkCplot(H_p,"H_p")
 
-    print(xzcvpr.xp(X, T, labelp))
+    # np.set_printoptions(edgeitems = np.nan)
+    xp, xp_feature = xzcvpr.xlabel(X, T, labelp)
+    x_bar = xzcvpr.X(xp_feature)
+    zp = xzcvpr.Z(xp_feature, x_bar)
+    # cp = xzcvpr.C(zp)
+    wp, vp = xzcvpr.V(cp)
+    pp = xzcvpr.P(zp, vp)
+    print(pp)
 
+    xn, xn_feature = xzcvpr.xlabel(X, T, labeln)
+    x_bar = xzcvpr.X(xn_feature)
+    zn = xzcvpr.Z(xn_feature, x_bar)
 
 
 

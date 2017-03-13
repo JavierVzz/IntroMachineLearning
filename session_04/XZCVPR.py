@@ -9,8 +9,8 @@ class XZCVPR():
 
     def X(self, X):
         X_bar = np.mean(X,axis=0)
-        df = pd.DataFrame(X_bar)
-        df.to_excel("X_Bar.xlsx", sheet_name="X_Bar")
+        # df = pd.DataFrame(X_bar)
+        # df.to_excel("X_Bar.xlsx", sheet_name="X_Bar")
         return X_bar
 
     def Z(self, X, X_bar):
@@ -26,8 +26,8 @@ class XZCVPR():
         w = np.flipud(w)
         V = np.flipud(V.T)
         V = V[0:2, :].copy()
-        df = pd.DataFrame(V)
-        df.to_excel("V.xlsx", sheet_name="V")
+        # df = pd.DataFrame(V)
+        # df.to_excel("V.xlsx", sheet_name="V")
         # df = pd.DataFrame(X_bar)
         # df.to_excel("X_Bar.xlsx", sheet_name="X_Bar")
         return w, V
@@ -62,7 +62,7 @@ class XZCVPR():
 
     def hist(self, P, T, label):
         P = P[T == label]
-        print(P[:,0])
+        # print(P[:,0])
         H, xedges, yedges = np.histogram2d(P[:,0],P[:,1], bins=[25, 25])
         # writer = pd.ExcelWriter("Pn_histogram_2d.xlsx")
         # h = pd.DataFrame(H)
@@ -74,9 +74,11 @@ class XZCVPR():
         # writer.save()
         return H, xedges, yedges
 
-    def xp(self, X, T, labelp):
-        xp = X[T==labelp]
-        return xp
+    def xlabel(self, X, T, label):
+        xp = X[T==label]
+        return xp, xp[np.argmax(np.sum(xp, axis=1)),:]
+
+
 
 
 
