@@ -17,7 +17,14 @@ def main():
     X = lc.loadData(file, cols)
     cols = "P"
     T = lc.loadData(file, cols)
-    print(T)
+    W_XaT = lc.W_XaT(X, T)
+    print(W_XaT)
+    print(W_XaT.shape)
+    classifierArray = lc.classifier(W_XaT)
+    print(classifierArray)
+    print(classifierArray.shape)
+    print(classifierArray == T)
+
 
 if __name__ == '__main__':
     print(os.path.basename(__file__))
