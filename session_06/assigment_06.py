@@ -17,13 +17,18 @@ def main():
     X = lc.loadData(file, cols)
     cols = "P"
     T = lc.loadData(file, cols)
-    W_XaT = lc.W_XaT(X, T)
+    W, W_XaT = lc.W_XaT(X, T)
+    print("\n\033[1mW\033[0m")
+    print(W)
+    print(W.shape)
+    print("\n\033[1mW_XaT\033[0m")
     print(W_XaT)
     print(W_XaT.shape)
     classifierArray = lc.classifier(W_XaT)
     print(classifierArray)
     print(classifierArray.shape)
     print(classifierArray == T)
+    lc.dfToExcel(W, W_XaT, classifierArray)
 
 
 if __name__ == '__main__':
