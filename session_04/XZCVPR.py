@@ -74,6 +74,10 @@ class XZCVPR():
         # writer.save()
         return H, xedges, yedges
 
+    def xp(self, X, T, labelp):
+        xp = X[T==labelp]
+        return xp
+
 
 
 

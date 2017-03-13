@@ -71,10 +71,12 @@ def main():
     H_p, xedges_p, yedges_p = xzcvpr.hist(P, T, labelp)
     H_n, xedges_n, yedges_n = xzcvpr.hist(P, T, labeln)
 
-    print("H_p shape: ", H_p.shape)
-    print("H_p: ", H_p)
+    # print("H_p shape: ", H_p.shape)
+    # print("H_p: ", H_p)
 
-    test.checkCplot(H_p,"H_p")
+    # test.checkCplot(H_p,"H_p")
+
+    print(xzcvpr.xp(X, T, labelp))
 
 
 
