@@ -19,11 +19,23 @@ class linearClassifier():
         XaX = np.hstack((Xa, X))
         W = np.dot(np.linalg.pinv(XaX), T)
         W_XaT = np.dot(XaX, W)
-        return W_XaT
+        return W, W_XaT
 
     def classifier(self, W_XaT):
         classifierArray = np.sign(W_XaT)
         return classifierArray
+
+    def dfToExcel(self, W, W_XaT, classifierArray):
+        writer = pd.ExcelWriter("W_W_XaT.xlsx")
+        W = pd.DataFrame(W)
+        W_XaT = pd.DataFrame(W_XaT)
+        classifierArray = pd.DataFrame(classifierArray)
+        W.to_excel(writer, "W")
+        W_XaT.to_excel(writer, "W_XaT")
+        classifierArray.to_excel(writer, "classifierArray")
+        writer.save()
+        print("Variables to W_W_XaT.xlsx")
+
 
 
 if __name__ == '__main__':
