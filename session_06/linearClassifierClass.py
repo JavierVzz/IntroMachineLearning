@@ -21,6 +21,12 @@ class linearClassifier():
         W_XaT = np.dot(XaX, W)
         return W, W_XaT
 
+    #TODO - Transform Type using Kesler
+    def Kesler(self, T):
+        pass
+    #b[np.where(a == 9),:] = [99,99,99,99]
+
+
     def classifier(self, W_XaT):
         classifierArray = np.sign(W_XaT)
         return classifierArray
