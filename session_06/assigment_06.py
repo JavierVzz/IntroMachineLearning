@@ -13,22 +13,46 @@ import numpy as np
 def main():
     lc = linearClassifierClass.linearClassifier()
     file = "Assignment_4_to_Pandas.xlsx"
+
+    # Training Data - Begins
+    print("\n\033[1mTraining Data\033[0m")
     cols = "A:O"
     X = lc.loadData(file, cols)
+
+    # Tb for Binary Classifier
     cols = "P"
-    T = lc.loadData(file, cols)
-    W, W_XaT = lc.W_XaT(X, T)
-    print("\n\033[1mW\033[0m")
+    Tb = lc.loadData(file, cols)
+
+    Wb = lc.W(X, Tb)
+    print("\n\033[1mW - Binary Classifier\033[0m")
+    print(Wb)
+    print(Wb.shape)
+
+    # T6c for 6-Class Classifier
+    cols = "Q"
+    T6c = lc.loadData(file, cols)
+    T6c = lc.kesler(T6c)
+    W = lc.W(X, T6c)
+
+    print("\n\033[1mW - 6-Class Classifier\033[0m")
     print(W)
     print(W.shape)
-    print("\n\033[1mW_XaT\033[0m")
-    print(W_XaT)
-    print(W_XaT.shape)
-    classifierArray = lc.classifier(W_XaT)
-    print(classifierArray)
-    print(classifierArray.shape)
-    print(classifierArray == T)
-    lc.dfToExcel(W, W_XaT, classifierArray)
+
+    # Training Data - Ends
+
+
+    # Testing Data - Begins
+    print("\n\033[1mTesting Data\033[0m")
+    cols = "A:O"
+    X = lc.loadData(file, cols)
+
+    print(X)
+
+    # Testing Data - Ends
+
+
+
+
 
 
 if __name__ == '__main__':

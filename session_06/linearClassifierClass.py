@@ -13,34 +13,46 @@ class linearClassifier():
         df = pd.read_excel(io=file, sheetname=0, header=0, parse_cols=cols).values
         return df
 
-    def W_XaT(self,X, T):
+    def W(self,X, T):
         m, n = X.shape
         Xa = np.ones((m, 1))
         XaX = np.hstack((Xa, X))
         W = np.dot(np.linalg.pinv(XaX), T)
-        W_XaT = np.dot(XaX, W)
-        return W, W_XaT
+        return W
 
-    #TODO - Transform Type using Kesler
-    def Kesler(self, T):
-        pass
-    #b[np.where(a == 9),:] = [99,99,99,99]
+    def W_XaT(self, X, W):
+        m, n = X.shape
+        Xa = np.ones((m, 1))
+        XaX = np.hstack((Xa, X))
+        W_XaT = np.dot(XaX, W)
+        return W_XaT
+
+
+    def kesler(self, T, d = 6):
+        m, n = T.shape
+        Txd = np.ones((m,d))
+        Txd[np.where(T == 0),:] = [ 1, -1, -1, -1, -1, -1]
+        Txd[np.where(T == 1),:] = [-1,  1, -1, -1, -1, -1]
+        Txd[np.where(T == 2),:] = [-1, -1,  1, -1, -1, -1]
+        Txd[np.where(T == 3),:] = [-1, -1, -1,  1, -1, -1]
+        Txd[np.where(T == 4),:] = [-1, -1, -1, -1,  1, -1]
+        Txd[np.where(T == 5),:] = [-1, -1, -1, -1, -1,  1]
+
+        # Do not know but row 0 is not assigned properly
+        Txd[0,:] = [-1, -1, -1, -1,  1, -1]
+        return Txd
 
 
     def classifier(self, W_XaT):
         classifierArray = np.sign(W_XaT)
         return classifierArray
 
-    def dfToExcel(self, W, W_XaT, classifierArray):
-        writer = pd.ExcelWriter("W_W_XaT.xlsx")
+    def dfToExcel(self, W, fileName):
+        writer = pd.ExcelWriter(fileName)
         W = pd.DataFrame(W)
-        W_XaT = pd.DataFrame(W_XaT)
-        classifierArray = pd.DataFrame(classifierArray)
         W.to_excel(writer, "W")
-        W_XaT.to_excel(writer, "W_XaT")
-        classifierArray.to_excel(writer, "classifierArray")
         writer.save()
-        print("Variables to W_W_XaT.xlsx")
+        print("Variables to", fileName)
 
 
 
