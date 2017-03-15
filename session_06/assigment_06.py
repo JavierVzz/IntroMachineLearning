@@ -16,12 +16,13 @@ def main():
 
     # Training Data - Begins
     print("\n\033[1mTraining Data\033[0m")
+    sheet = 0
     cols = "A:O"
-    X = lc.loadData(file, cols)
+    X = lc.loadData(file, sheet, cols)
 
     # Tb for Binary Classifier
     cols = "P"
-    Tb = lc.loadData(file, cols)
+    Tb = lc.loadData(file, sheet, cols)
 
     Wb = lc.W(X, Tb)
     print("\n\033[1mW - Binary Classifier\033[0m")
@@ -30,7 +31,7 @@ def main():
 
     # T6c for 6-Class Classifier
     cols = "Q"
-    T6c = lc.loadData(file, cols)
+    T6c = lc.loadData(file, sheet, cols)
     T6c = lc.kesler(T6c)
     W = lc.W(X, T6c)
 
@@ -43,16 +44,13 @@ def main():
 
     # Testing Data - Begins
     print("\n\033[1mTesting Data\033[0m")
+    sheet = 2
     cols = "A:O"
-    X = lc.loadData(file, cols)
+    X = lc.loadData(file, sheet, cols)
 
     print(X)
 
     # Testing Data - Ends
-
-
-
-
 
 
 if __name__ == '__main__':
