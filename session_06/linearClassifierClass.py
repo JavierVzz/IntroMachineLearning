@@ -42,6 +42,14 @@ class linearClassifier():
         Txd[0,:] = [-1, -1, -1, -1,  1, -1]
         return Txd
 
+    def invKesler(self, T):
+        m, n = T.shape
+        Txd = np.ones((m,1))
+        print(Txd)
+        print(Txd.shape)
+
+
+
 
     def classifier(self, W_XaT):
         classifierArray = np.sign(W_XaT)
