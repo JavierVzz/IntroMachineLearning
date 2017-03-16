@@ -44,10 +44,17 @@ class linearClassifier():
 
     def invKesler(self, T):
         m, n = T.shape
+        print("Kesler Inverse")
+        print(T)
+        print(T.shape)
         Txd = np.ones((m,1))
+        print(T[1,:].shape)
+        A = [-1, -1, -1, -1, -1, -1]
+        #TODO rest of Type from 1 to 5
+        Txd[np.where(T[:,0]==1),0] = 0
         print(Txd)
-        print(Txd.shape)
-
+        # print(Txd)
+        # print(Txd.shape)
 
 
 
