@@ -8,9 +8,9 @@ class linearClassifier():
     def __init__(self):
         pass
 
-    def loadData(self, file, sheet, cols):
+    def loadData(self, file, sheet, cols, skip):
         """Load an excel file to df"""
-        df = pd.read_excel(io=file, sheetname=sheet, header=0, parse_cols=cols).values
+        df = pd.read_excel(io=file, sheetname=sheet, header=0, parse_cols=cols, skiprows=skip).values
         return df
 
     def W(self,X, T):
