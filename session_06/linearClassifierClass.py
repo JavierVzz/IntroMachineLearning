@@ -49,7 +49,6 @@ class linearClassifier():
         print(T.shape)
         Txd = np.ones((m,1))
         print(T[1,:].shape)
-        A = [-1, -1, -1, -1, -1, -1]
         Txd[np.where(T[:,0]==1),0] = 0
         Txd[np.where(T[:,1]==1),0] = 1
         Txd[np.where(T[:,2]==1),0] = 2

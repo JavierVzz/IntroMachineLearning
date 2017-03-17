@@ -17,14 +17,14 @@ def main():
     sheet = 0
     cols = "A:O"
     skip = 0
-    X = lc.loadData(file, sheet, cols, skip)
+    Xtrain = lc.loadData(file, sheet, cols, skip)
     # print(X)
 
     # Tb for Binary Classifier
     cols = "P"
     Tb = lc.loadData(file, sheet, cols, skip)
 
-    Wb = lc.W(X, Tb)
+    Wb = lc.W(Xtrain, Tb)
     print("\n\033[1mW - Binary Classifier\033[0m")
     print(Wb)
     print(Wb.shape)
@@ -33,7 +33,7 @@ def main():
     cols = "Q"
     T6c = lc.loadData(file, sheet, cols, skip)
     T6c = lc.kesler(T6c)
-    W6c = lc.W(X, T6c)
+    W6c = lc.W(Xtrain, T6c)
 
     print("\n\033[1mW - 6-Class Classifier\033[0m")
     print(W6c)
@@ -47,14 +47,14 @@ def main():
     sheet = 2
     cols = "A:O"
     skip = 3
-    X = lc.loadData(file, sheet, cols, skip)
-    print(X)
+    Xtest = lc.loadData(file, sheet, cols, skip)
+    print(Xtest)
 
     print("\n\033[1mW - Binary Classifier\033[0m")
 
     # Tb for Binary Classifier
 
-    fb = lc.W_XaT(X, Wb)
+    fb = lc.W_XaT(Xtest, Wb)
     print(fb)
     print(fb.shape)
 
@@ -64,7 +64,7 @@ def main():
 
     # Tb for 6-Class Classifier
 
-    t6c = lc.W_XaT(X, W6c)
+    t6c = lc.W_XaT(Xtest, W6c)
     print(t6c)
     print(t6c.shape)
 
