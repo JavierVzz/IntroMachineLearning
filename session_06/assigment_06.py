@@ -71,8 +71,8 @@ def main():
     t6cb = lc.classifier(t6c)
     print(t6cb)
     print(t6cb.shape)
-
-    lc.invKesler(t6cb)
+    #
+    # lc.invKesler(t6cb)
 
 
 

@@ -50,13 +50,15 @@ class linearClassifier():
         Txd = np.ones((m,1))
         print(T[1,:].shape)
         A = [-1, -1, -1, -1, -1, -1]
-        #TODO rest of Type from 1 to 5
         Txd[np.where(T[:,0]==1),0] = 0
-        print(Txd)
+        Txd[np.where(T[:,1]==1),0] = 1
+        Txd[np.where(T[:,2]==1),0] = 2
+        Txd[np.where(T[:,3]==1),0] = 3
+        Txd[np.where(T[:,4]==1),0] = 4
+        Txd[np.where(T[:,5]==1),0] = 5
+        print(np.hstack((T,Txd)))
         # print(Txd)
         # print(Txd.shape)
-
-
 
     def classifier(self, W_XaT):
         classifierArray = np.sign(W_XaT)
