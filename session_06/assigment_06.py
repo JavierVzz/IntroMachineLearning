@@ -65,6 +65,9 @@ def main():
     # Tb for 6-Class Classifier
 
     t6c = lc.W_XaT(Xtest, W6c)
+    print(Xtest)
+    print(W6c)
+    print(W6c.shape)
     print(t6c)
     print(t6c.shape)
 
