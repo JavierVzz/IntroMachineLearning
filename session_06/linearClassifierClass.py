@@ -63,6 +63,11 @@ class linearClassifier():
         classifierArray = np.sign(W_XaT)
         return classifierArray
 
+    def sixClassClassifier(self, W_XaT):
+        classifierArray = np.where(W_XaT == np.amax(W_XaT, axis=1))
+        return classifierArray
+
+
     def dfToExcel(self, W, fileName):
         writer = pd.ExcelWriter(fileName)
         W = pd.DataFrame(W)

@@ -71,7 +71,7 @@ def main():
     print(t6c)
     print(t6c.shape)
 
-    t6cb = lc.classifier(t6c)
+    t6cb = lc.sixClassClassifier(t6c)
     print(t6cb)
     print(t6cb.shape)
     #
