@@ -44,11 +44,7 @@ class linearClassifier():
 
     def invKesler(self, T):
         m, n = T.shape
-        print("Kesler Inverse")
-        print(T)
-        print(T.shape)
         Txd = np.ones((m,1))
-        print(T[1,:].shape)
         Txd[np.where(T[:,0]==1),0] = 0
         Txd[np.where(T[:,1]==1),0] = 1
         Txd[np.where(T[:,2]==1),0] = 2
@@ -81,9 +77,6 @@ class linearClassifier():
         tn, n = tn.shape
         fp, n = fp.shape
         return tp, fn, tn, fp
-
-
-
 
 
     def dfToExcel(self, var1, var2, var3, fileName):

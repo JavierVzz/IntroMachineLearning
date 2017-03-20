@@ -32,8 +32,8 @@ def main():
     # T6c for 6-Class Classifier
     cols = "Q"
     T6c = lc.loadData(file, sheet, cols, skip)
-    T6c = lc.kesler(T6c)
-    W6c = lc.W(Xtrain, T6c)
+    T6ck = lc.kesler(T6c)
+    W6c = lc.W(Xtrain, T6ck)
 
     print("\n\033[1mW - 6-Class Classifier\033[0m")
     print(W6c)
@@ -70,12 +70,11 @@ def main():
 
     # Confusion Matrix Starts
     # Binary Classifier Confusion Matrix (-1=Fail, +1=Pass)
-    print("\n\033[1mW - Confusion Binary Class Classifier\033[0m")
+    print("\n\033[1mW - Confusion Binary Class Matrix\033[0m")
     confusion2 = lc.W_XaT(Xtrain, Wb)
     confusion2binary = lc.binaryClassClassifier(confusion2)
 
     # lc.dfToExcel(Tb, confusion2binary, Tb==confusion2binary, "confusionBinary.xlsx")
-
     tp, fn, tn, fp = lc.confusionBinaryMatrix(Tb, confusion2binary)
 
     print("True Positive:", tp)
@@ -87,6 +86,18 @@ def main():
     print("Sensitivity:", tp / (tp + fn))
     print("Specificity:", tn / (fp + tn))
     print("PPV:", tp / (fp + tp))
+
+    print("\n\033[1mW - Confusion 6th Class Matrix\033[0m")
+
+    print("Original")
+    print(T6c)
+    t6Compare = lc.W_XaT(Xtrain, W6c)
+    t6Compare = lc.sixClassClassifier(t6Compare)
+    t6Compare = lc.invKesler(t6Compare)
+    print("Generated")
+    print(t6Compare)
+    # print("Comparison")
+    # print(T6c==t6Compare)
 
 if __name__ == '__main__':
     print(os.path.basename(__file__))
