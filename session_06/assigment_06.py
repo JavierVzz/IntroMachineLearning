@@ -96,8 +96,7 @@ def main():
     t6Compare = lc.invKesler(t6Compare)
     print("Generated")
     print(t6Compare)
-    # print("Comparison")
-    # print(T6c==t6Compare)
+    lc.confusion6thMatrix(T6c, t6Compare)
 
 if __name__ == '__main__':
     print(os.path.basename(__file__))

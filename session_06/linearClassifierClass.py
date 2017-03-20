@@ -78,6 +78,29 @@ class linearClassifier():
         fp, n = fp.shape
         return tp, fn, tn, fp
 
+    def confusion6thMatrix(self, original, generated):
+        table = np.hstack((original, generated))
+        np.set_printoptions(edgeitems=10)
+        tp00 = table[np.where((table == (0,0)).all(axis=1))]
+        tp01 = table[np.where((table == (0,1)).all(axis=1))]
+        tp02 = table[np.where((table == (0,2)).all(axis=1))]
+        tp03 = table[np.where((table == (0,3)).all(axis=1))]
+        tp04 = table[np.where((table == (0,4)).all(axis=1))]
+        tp05 = table[np.where((table == (0,5)).all(axis=1))]
+
+        tp40 = table[np.where((table == (4,0)).all(axis=1))]
+        tp41 = table[np.where((table == (4,1)).all(axis=1))]
+        tp42 = table[np.where((table == (4,2)).all(axis=1))]
+        tp43 = table[np.where((table == (4,3)).all(axis=1))]
+        tp44 = table[np.where((table == (4,4)).all(axis=1))]
+        tp45 = table[np.where((table == (4,5)).all(axis=1))]
+
+        print("Counts 0")
+        print(tp00.shape, tp01.shape, tp02.shape, tp03.shape, tp04.shape, tp05.shape)
+        print("Counts 4")
+        print(tp40.shape, tp41.shape, tp42.shape, tp43.shape, tp44.shape, tp45.shape)
+
+
 
     def dfToExcel(self, var1, var2, var3, fileName):
         writer = pd.ExcelWriter(fileName)
