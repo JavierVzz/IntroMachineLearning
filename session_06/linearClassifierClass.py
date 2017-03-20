@@ -87,6 +87,27 @@ class linearClassifier():
         tp03 = table[np.where((table == (0,3)).all(axis=1))]
         tp04 = table[np.where((table == (0,4)).all(axis=1))]
         tp05 = table[np.where((table == (0,5)).all(axis=1))]
+        
+        tp10 = table[np.where((table == (1,0)).all(axis=1))]
+        tp11 = table[np.where((table == (1,1)).all(axis=1))]
+        tp12 = table[np.where((table == (1,2)).all(axis=1))]
+        tp13 = table[np.where((table == (1,3)).all(axis=1))]
+        tp14 = table[np.where((table == (1,4)).all(axis=1))]
+        tp15 = table[np.where((table == (1,5)).all(axis=1))]
+
+        tp20 = table[np.where((table == (2,0)).all(axis=1))]
+        tp21 = table[np.where((table == (2,1)).all(axis=1))]
+        tp22 = table[np.where((table == (2,2)).all(axis=1))]
+        tp23 = table[np.where((table == (2,3)).all(axis=1))]
+        tp24 = table[np.where((table == (2,4)).all(axis=1))]
+        tp25 = table[np.where((table == (2,5)).all(axis=1))]
+
+        tp30 = table[np.where((table == (3,0)).all(axis=1))]
+        tp31 = table[np.where((table == (3,1)).all(axis=1))]
+        tp32 = table[np.where((table == (3,2)).all(axis=1))]
+        tp33 = table[np.where((table == (3,3)).all(axis=1))]
+        tp34 = table[np.where((table == (3,4)).all(axis=1))]
+        tp35 = table[np.where((table == (3,5)).all(axis=1))]
 
         tp40 = table[np.where((table == (4,0)).all(axis=1))]
         tp41 = table[np.where((table == (4,1)).all(axis=1))]
@@ -95,10 +116,26 @@ class linearClassifier():
         tp44 = table[np.where((table == (4,4)).all(axis=1))]
         tp45 = table[np.where((table == (4,5)).all(axis=1))]
 
+
+        tp50 = table[np.where((table == (5,0)).all(axis=1))]
+        tp51 = table[np.where((table == (5,1)).all(axis=1))]
+        tp52 = table[np.where((table == (5,2)).all(axis=1))]
+        tp53 = table[np.where((table == (5,3)).all(axis=1))]
+        tp54 = table[np.where((table == (5,4)).all(axis=1))]
+        tp55 = table[np.where((table == (5,5)).all(axis=1))]
+
         print("Counts 0")
         print(tp00.shape, tp01.shape, tp02.shape, tp03.shape, tp04.shape, tp05.shape)
+        print("Counts 1")
+        print(tp10.shape, tp11.shape, tp12.shape, tp13.shape, tp14.shape, tp15.shape)
+        print("Counts 2")
+        print(tp20.shape, tp21.shape, tp22.shape, tp23.shape, tp24.shape, tp25.shape)
+        print("Counts 3")
+        print(tp30.shape, tp31.shape, tp32.shape, tp33.shape, tp34.shape, tp35.shape)
         print("Counts 4")
         print(tp40.shape, tp41.shape, tp42.shape, tp43.shape, tp44.shape, tp45.shape)
+        print("Counts 5")
+        print(tp50.shape, tp51.shape, tp52.shape, tp53.shape, tp54.shape, tp55.shape)
 
 
 
