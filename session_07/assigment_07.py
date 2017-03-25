@@ -14,7 +14,7 @@ def main():
 
     # Training Data - Begins
     print("\n\033[1mTraining Data\033[0m")
-    sheet = 0
+    sheet = "Sheet1"
     cols = "A:G"
     skip = 1
     Xtrain = lc.loadData(file, sheet, cols, skip)
@@ -23,11 +23,19 @@ def main():
     doors = lc.kesler4LabelsIntStr(Xtrain[:,2])
     persons = lc.kesler3LabelsIntStr(Xtrain[:,3])
     trunk = lc.kesler3Labels(Xtrain[:,4])
-    print(price)
-    print(maintenance)
-    print(doors)
-    print(persons)
-    print(trunk)
+    safety = lc.kesler3SafetyLabels(Xtrain[:,5])
+    recommendation = lc.keslerRecommendation(Xtrain[:,6])
+
+    W = lc.W(np.hstack((price, maintenance, doors, persons, trunk, safety)), recommendation)
+    print(W)
+    print(W.shape)
+    W_XaT = lc.W_XaT(np.hstack((price, maintenance, doors, persons, trunk, safety)), W)
+    print(W_XaT)
+    print(W_XaT.shape)
+    classifierArray = lc.sixClassClassifier(W_XaT)
+    print(classifierArray)
+    print(classifierArray.shape)
+    print(recommendation)
 
     # print(np.unique(Xtrain[:,2]))
 

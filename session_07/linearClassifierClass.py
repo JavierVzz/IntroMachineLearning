@@ -13,7 +13,8 @@ class linearClassifier():
         df = pd.read_excel(io=file, sheetname=sheet, header=0, parse_cols=cols, skiprows=skip).values
         return df
 
-    def W(self,X, T):
+
+    def W(self, X, T):
         m, n = X.shape
         Xa = np.ones((m, 1))
         XaX = np.hstack((Xa, X))
@@ -32,7 +33,15 @@ class linearClassifier():
         labels = np.ones((m, d))
         labels[np.where(Xtrain == "small"),:] = [ 1, -1, -1]
         labels[np.where(Xtrain == "med"),:] = [-1,  1, -1]
-        labels[np.where(Xtrain == "big"),:] = [-1, -1, 1,]
+        labels[np.where(Xtrain == "big"),:] = [-1, -1, 1]
+        return labels
+
+    def kesler3SafetyLabels(self, Xtrain, d=3):
+        m = Xtrain.size
+        labels = np.ones((m, d))
+        labels[np.where(Xtrain == "low"),:] = [ 1, -1, -1]
+        labels[np.where(Xtrain == "med"),:] = [-1,  1, -1]
+        labels[np.where(Xtrain == "high"),:] = [-1, -1, 1]
         return labels
 
     def kesler3LabelsIntStr(self, Xtrain, d=3):
@@ -40,29 +49,35 @@ class linearClassifier():
         labels = np.ones((m, d))
         labels[np.where(Xtrain == 2),:] = [ 1, -1, -1]
         labels[np.where(Xtrain == 4),:] = [-1,  1, -1]
-        labels[np.where(Xtrain == "more"),:] = [-1, -1, 1,]
+        labels[np.where(Xtrain == "more"),:] = [-1, -1, 1]
         return labels
 
     def kesler4Labels(self, Xtrain, d=4):
         m = Xtrain.size
         labels = np.ones((m, d))
-        labels[np.where(Xtrain == "low"),:] = [ 1, -1, -1, -1,]
-        labels[np.where(Xtrain == "med"),:] = [-1,  1, -1, -1,]
-        labels[np.where(Xtrain == "high"),:] = [-1, -1,  1, -1,]
-        labels[np.where(Xtrain == "vhigh"),:] = [-1, -1, -1,  1,]
+        labels[np.where(Xtrain == "low"),:] = [ 1, -1, -1, -1]
+        labels[np.where(Xtrain == "med"),:] = [-1,  1, -1, -1]
+        labels[np.where(Xtrain == "high"),:] = [-1, -1,  1, -1]
+        labels[np.where(Xtrain == "vhigh"),:] = [-1, -1, -1,  1]
         return labels
 
     def kesler4LabelsIntStr(self, Xtrain, d=4):
         m = Xtrain.size
         labels = np.ones((m, d))
-        labels[np.where(Xtrain == 2),:] = [ 1, -1, -1, -1,]
-        labels[np.where(Xtrain == 3),:] = [-1,  1, -1, -1,]
-        labels[np.where(Xtrain == 4),:] = [-1, -1,  1, -1,]
-        labels[np.where(Xtrain == "5more"),:] = [-1, -1, -1,  1,]
+        labels[np.where(Xtrain == 2),:] = [ 1, -1, -1, -1]
+        labels[np.where(Xtrain == 3),:] = [-1,  1, -1, -1]
+        labels[np.where(Xtrain == 4),:] = [-1, -1,  1, -1]
+        labels[np.where(Xtrain == "5more"),:] = [-1, -1, -1,  1]
         return labels
 
-
-
+    def keslerRecommendation(self, Xtrain, d=4):
+        m = Xtrain.size
+        labels = np.ones((m, d))
+        labels[np.where(Xtrain == "vgood"),:] = [ 1, -1, -1, -1]
+        labels[np.where(Xtrain == "good"),:] = [-1,  1, -1, -1]
+        labels[np.where(Xtrain == "acc"),:] = [-1, -1,  1, -1]
+        labels[np.where(Xtrain == "unacc"),:] = [-1, -1, -1,  1]
+        return labels
 
     def kesler(self, T, d = 6):
         m, n = T.shape
