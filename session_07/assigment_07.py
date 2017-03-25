@@ -37,6 +37,7 @@ def main():
     print(classifierArray.shape)
     print(recommendation)
 
+    #todo build confussion matrix for multi classifier
     # print(np.unique(Xtrain[:,2]))
 
 
