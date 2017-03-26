@@ -31,7 +31,17 @@ def main():
     W_XaT = lc.W_XaT(np.hstack((price, maintenance, doors, persons, trunk, safety)), W)
     classifierArray = lc.sixClassClassifier(W_XaT)
     #todo build confussion matrix for multi classifier
+    print(recommendation.shape)
+    invRecommendation = lc.invKeslerRecommendation(recommendation)
+    print(invRecommendation)
+
     print(classifierArray)
+    invClassifierArray = lc.invKeslerRecommendation(classifierArray)
+    print(invClassifierArray)
+
+    m,n = recommendation.shape
+    lc.confusionMatrix(invRecommendation, invClassifierArray)
+    lc.confusion2Matrix(invRecommendation, invClassifierArray, n)
 
     # lc.confusionMatrix(recommendation, classifierArray)
 

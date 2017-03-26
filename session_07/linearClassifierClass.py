@@ -80,12 +80,18 @@ class linearClassifier():
         return labels
 
     def invKeslerRecommendation(self, T):
+        """
+        1 = vgood
+        2 = good
+        3 = acc
+        4 = unacc
+        """
         m, n = T.shape
-        Txd = np.ones((m,n))
-        Txd[np.where(T[:,0]==1),0] = "vgood"
-        # # Txd[np.where(T[:,1]==1),0] = " good"
-        # # Txd[np.where(T[:,2]==1),0] = "  acc"
-        # Txd[np.where(T[:,3]==1),:] = "unacc"
+        Txd = np.ones((m,1))
+        Txd[np.where(T[:,0]==1),0] = 1
+        Txd[np.where(T[:,1]==1),0] = 2
+        Txd[np.where(T[:,2]==1),0] = 3
+        Txd[np.where(T[:,3]==1),0] = 4
         return Txd
 
     def kesler(self, T, d = 6):
@@ -141,13 +147,84 @@ class linearClassifier():
     def confusionMatrix(self, original, generated):
         np.set_printoptions(edgeitems=10)
         table = np.hstack((original, generated))
-        print(table)
-        tp00 = table[np.where((table == (0,0)).all(axis=1))]
-        tp01 = table[np.where((table == (0,1)).all(axis=1))]
-        tp02 = table[np.where((table == (0,2)).all(axis=1))]
-        tp03 = table[np.where((table == (0,3)).all(axis=1))]
-        print("Counts 0")
-        print(tp00.shape, tp01.shape, tp02.shape, tp03.shape)
+
+        tp10 = table[np.where((table == (1,1)).all(axis=1))]
+        tp11 = table[np.where((table == (1,2)).all(axis=1))]
+        tp12 = table[np.where((table == (1,3)).all(axis=1))]
+        tp13 = table[np.where((table == (1,4)).all(axis=1))]
+        print("Counts 1")
+        print(tp10.shape, tp11.shape, tp12.shape, tp13.shape)
+
+        tp20 = table[np.where((table == (2,1)).all(axis=1))]
+        tp21 = table[np.where((table == (2,2)).all(axis=1))]
+        tp22 = table[np.where((table == (2,3)).all(axis=1))]
+        tp23 = table[np.where((table == (2,4)).all(axis=1))]
+        print("Counts 2")
+        print(tp20.shape, tp21.shape, tp22.shape, tp23.shape)
+
+        tp30 = table[np.where((table == (3,1)).all(axis=1))]
+        tp31 = table[np.where((table == (3,2)).all(axis=1))]
+        tp32 = table[np.where((table == (3,3)).all(axis=1))]
+        tp33 = table[np.where((table == (3,4)).all(axis=1))]
+        print("Counts 3")
+        print(tp30.shape, tp31.shape, tp32.shape, tp33.shape)
+
+        tp40 = table[np.where((table == (4,1)).all(axis=1))]
+        tp41 = table[np.where((table == (4,2)).all(axis=1))]
+        tp42 = table[np.where((table == (4,3)).all(axis=1))]
+        tp43 = table[np.where((table == (4,4)).all(axis=1))]
+        print("Counts 4")
+        print(tp40.shape, tp41.shape, tp42.shape, tp43.shape)
+
+
+    def confusion2Matrix(self, original, generated, d):
+        np.set_printoptions(edgeitems=10)
+        table = np.hstack((original, generated))
+        print(d)
+        tp = []
+
+        a1 = np.zeros((d,d))
+        print(a1)
+        for i in range(1, d+1):
+
+            print(i)
+            a = table[np.where((table == (1,i)).all(axis=1))]
+            m, n = a.shape
+            a1[0,i-1] = m
+
+        print(a1)
+
+
+        tp10 = table[np.where((table == (1,1)).all(axis=1))]
+        tp11 = table[np.where((table == (1,2)).all(axis=1))]
+        tp12 = table[np.where((table == (1,3)).all(axis=1))]
+        tp13 = table[np.where((table == (1,4)).all(axis=1))]
+        print("Counts 1")
+        print(tp10.shape, tp11.shape, tp12.shape, tp13.shape)
+
+        tp20 = table[np.where((table == (2,1)).all(axis=1))]
+        tp21 = table[np.where((table == (2,2)).all(axis=1))]
+        tp22 = table[np.where((table == (2,3)).all(axis=1))]
+        tp23 = table[np.where((table == (2,4)).all(axis=1))]
+        print("Counts 2")
+        print(tp20.shape, tp21.shape, tp22.shape, tp23.shape)
+
+        tp30 = table[np.where((table == (3,1)).all(axis=1))]
+        tp31 = table[np.where((table == (3,2)).all(axis=1))]
+        tp32 = table[np.where((table == (3,3)).all(axis=1))]
+        tp33 = table[np.where((table == (3,4)).all(axis=1))]
+        print("Counts 3")
+        print(tp30.shape, tp31.shape, tp32.shape, tp33.shape)
+
+        tp40 = table[np.where((table == (4,1)).all(axis=1))]
+        tp41 = table[np.where((table == (4,2)).all(axis=1))]
+        tp42 = table[np.where((table == (4,3)).all(axis=1))]
+        tp43 = table[np.where((table == (4,4)).all(axis=1))]
+        print("Counts 4")
+        print(tp40.shape, tp41.shape, tp42.shape, tp43.shape)
+
+
+
 
     def confusion6thMatrix(self, original, generated):
         table = np.hstack((original, generated))
