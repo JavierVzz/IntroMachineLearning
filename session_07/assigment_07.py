@@ -26,18 +26,15 @@ def main():
     safety = lc.kesler3SafetyLabels(Xtrain[:,5])
     recommendation = lc.keslerRecommendation(Xtrain[:,6])
 
-    W = lc.W(np.hstack((price, maintenance, doors, persons, trunk, safety)), recommendation)
-    print(W)
-    print(W.shape)
-    W_XaT = lc.W_XaT(np.hstack((price, maintenance, doors, persons, trunk, safety)), W)
-    print(W_XaT)
-    print(W_XaT.shape)
-    classifierArray = lc.sixClassClassifier(W_XaT)
-    print(classifierArray)
-    print(classifierArray.shape)
-    print(recommendation)
 
+    W = lc.W(np.hstack((price, maintenance, doors, persons, trunk, safety)), recommendation)
+    W_XaT = lc.W_XaT(np.hstack((price, maintenance, doors, persons, trunk, safety)), W)
+    classifierArray = lc.sixClassClassifier(W_XaT)
     #todo build confussion matrix for multi classifier
+    print(classifierArray)
+
+    # lc.confusionMatrix(recommendation, classifierArray)
+
     # print(np.unique(Xtrain[:,2]))
 
 

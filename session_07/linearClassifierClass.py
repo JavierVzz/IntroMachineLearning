@@ -79,6 +79,15 @@ class linearClassifier():
         labels[np.where(Xtrain == "unacc"),:] = [-1, -1, -1,  1]
         return labels
 
+    def invKeslerRecommendation(self, T):
+        m, n = T.shape
+        Txd = np.ones((m,n))
+        Txd[np.where(T[:,0]==1),0] = "vgood"
+        # # Txd[np.where(T[:,1]==1),0] = " good"
+        # # Txd[np.where(T[:,2]==1),0] = "  acc"
+        # Txd[np.where(T[:,3]==1),:] = "unacc"
+        return Txd
+
     def kesler(self, T, d = 6):
         m, n = T.shape
         Txd = np.ones((m,d))
@@ -128,6 +137,17 @@ class linearClassifier():
         tn, n = tn.shape
         fp, n = fp.shape
         return tp, fn, tn, fp
+
+    def confusionMatrix(self, original, generated):
+        np.set_printoptions(edgeitems=10)
+        table = np.hstack((original, generated))
+        print(table)
+        tp00 = table[np.where((table == (0,0)).all(axis=1))]
+        tp01 = table[np.where((table == (0,1)).all(axis=1))]
+        tp02 = table[np.where((table == (0,2)).all(axis=1))]
+        tp03 = table[np.where((table == (0,3)).all(axis=1))]
+        print("Counts 0")
+        print(tp00.shape, tp01.shape, tp02.shape, tp03.shape)
 
     def confusion6thMatrix(self, original, generated):
         table = np.hstack((original, generated))
