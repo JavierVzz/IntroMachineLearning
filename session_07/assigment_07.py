@@ -40,8 +40,7 @@ def main():
     print(invClassifierArray)
 
     m,n = recommendation.shape
-    lc.confusionMatrix(invRecommendation, invClassifierArray)
-    lc.confusion2Matrix(invRecommendation, invClassifierArray, n)
+    lc.confusionMatrix(invRecommendation, invClassifierArray, n)
 
     # lc.confusionMatrix(recommendation, classifierArray)
 
