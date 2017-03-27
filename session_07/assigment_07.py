@@ -33,8 +33,9 @@ def main():
     invRecommendation = lc.invKeslerRecommendation(recommendation)
     invClassifierArray = lc.invKeslerRecommendation(classifierArray)
     m,n = recommendation.shape
-    confusionMatrix = lc.confusionMatrix(invRecommendation, invClassifierArray, n)
+    confusionMatrix, ppv = lc.confusionMatrix(invRecommendation, invClassifierArray, n)
     print(confusionMatrix)
+    print(ppv)
 
 
 

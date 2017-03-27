@@ -82,8 +82,8 @@ def main():
     zp = xzcvpr.Z(xp_feature, x_bar)
     # cp = xzcvpr.C(zp)
     wp, vp = xzcvpr.V(cp)
-    pp = xzcvpr.P(zp, vp)
-    print(pp)
+    # pp = xzcvpr.P(zp, vp)
+    # print(pp)
 
     xn, xn_feature = xzcvpr.xlabel(X, T, labeln)
     x_bar = xzcvpr.X(xn_feature)

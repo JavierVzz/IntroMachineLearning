@@ -154,9 +154,9 @@ class linearClassifier():
                 a = table[np.where((table == (i,j)).all(axis=1))]
                 m, n = a.shape
                 a1[i-1,j-1] = m
-            ppv[0,i-1]
-
-        return a1
+        a1diagonal = np.diagonal(a1)
+        ppv = np.diagonal(a1)/np.sum(a1,axis=0)
+        return a1, ppv
 
     def dfToExcel(self, var1, var2, var3, fileName):
         writer = pd.ExcelWriter(fileName)
