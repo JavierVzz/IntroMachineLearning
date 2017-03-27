@@ -28,6 +28,7 @@ class linearClassifier():
         return W_XaT
 
 
+
     def kesler(self, T, d = 6):
         m, n = T.shape
         Txd = np.ones((m,d))
