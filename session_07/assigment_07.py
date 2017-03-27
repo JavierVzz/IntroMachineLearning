@@ -13,7 +13,7 @@ def main():
     file = "Car_Data.xlsx"
 
     # Training Data - Begins
-    print("\n\033[1mTraining Data\033[0m")
+    print("\n\033[1m4 Class Classifier\033[0m")
     sheet = "Sheet1"
     cols = "A:G"
     skip = 1
@@ -36,6 +36,10 @@ def main():
     confusionMatrix, ppv = lc.confusionMatrix(invRecommendation, invClassifierArray, n)
     print(confusionMatrix)
     print(ppv)
+
+    print("\n\033[1mBinary Class Classifier\033[0m")
+
+
 
 
 

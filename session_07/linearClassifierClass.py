@@ -79,6 +79,15 @@ class linearClassifier():
         labels[np.where(Xtrain == "unacc"),:] = [-1, -1, -1,  1]
         return labels
 
+    def keslerBinaryRecommendation(self, Xtrain, d=1):
+        m = Xtrain.size
+        labels = np.ones((m, d))
+        labels[np.where(Xtrain == "vgood"),:] = [1]
+        labels[np.where(Xtrain == "good"),:] = [1]
+        labels[np.where(Xtrain == "acc"),:] = [1]
+        labels[np.where(Xtrain == "unacc"),:] = [-1]
+        return labels
+
     def invKeslerRecommendation(self, T):
         """
         1 = vgood
