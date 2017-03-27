@@ -147,20 +147,16 @@ class linearClassifier():
     def confusionMatrix(self, original, generated, d):
         np.set_printoptions(edgeitems=10)
         table = np.hstack((original, generated))
-        print(d)
-        tp = []
-
         a1 = np.zeros((d,d))
-        print(a1)
+        ppv = np.zeros((1,d))
         for i in range(1, d+1):
             for j in range(1, d+1):
-
-                print(i)
                 a = table[np.where((table == (i,j)).all(axis=1))]
                 m, n = a.shape
                 a1[i-1,j-1] = m
+            ppv[0,i-1]
 
-        print(a1)
+        return a1
 
     def dfToExcel(self, var1, var2, var3, fileName):
         writer = pd.ExcelWriter(fileName)
